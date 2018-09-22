@@ -1,0 +1,14 @@
+version: '3.0'
+
+services:
+  bind:
+    image: sameersbn/bind:latest
+    dns: 127.0.0.1
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 10000:10000
+    environment:
+      ROOT_PASSWORD: P@ssw0rd
+    volumes:
+      - /srv/docker/bind:/data

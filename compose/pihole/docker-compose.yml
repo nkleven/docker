@@ -3,15 +3,18 @@ version: '3.0'
 services:
   pihole:
     image: pihole/pihole:latest
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
-      - 80:80
-      - 443:443
-    environment:
-      ServerIP: 192.168.48.215
-      ServerIPv6: "${IPv6}"
-    volumes:
-      - "${DOCKER_CONFIGS}/pihole/:/etc/pihole/"
-      - "${DOCKER_CONFIGS}/dnsmasq.d/:/etc/dnsmasq.d/"
-    restart: unless-stopped
+  ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+  environment:
+    ServerIP: 192.168.48.215
+    #ServerIPv6: "${IPv6}"
+    VIRTUAL_HOST: pihole.nwiss.net
+  volumes:
+      - "/etc/pihole/:/etc/pihole/"
+      - "/etc/dnsmasq.d/:/etc/dnsmasq.d/"
+      - '/var/log/pihole.log:/var/log/pihole.log'
+  restart: unless-stopped

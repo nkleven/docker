@@ -13,7 +13,7 @@ services:
       #ServerIPv6: '${IPv6}'
       VIRTUAL_HOST: pihole.nwiss.net
     volumes:
-      - '/etc/pihole/:/etc/pihole/'
-      - '/etc/dnsmasq.d/:/etc/dnsmasq.d/'
-      - '/var/log/pihole.log:/var/log/pihole.log'
+      - '/home/nkleven/pihole/etc/pihole/:/etc/pihole/'
+      - '/home/nkleven/pihole/etc/dnsmasq.d/:/etc/dnsmasq.d/'
+      - '/home/nkleven/pihole/var/log/pihole.log:/var/log/pihole.log'
     restart: unless-stopped

@@ -9,7 +9,7 @@ services:
       - 8080:80
       - 8443:443
     environment:
-      ServerIP: "${IP}"
+      ServerIP: 192.168.48.215
       ServerIPv6: "${IPv6}"
     volumes:
       - "${DOCKER_CONFIGS}/pihole/:/etc/pihole/"

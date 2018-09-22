@@ -8,11 +8,11 @@ services:
       - '67:67/udp'
       - '80:80/tcp'
       - '443:443/tcp'
-  environment:
-    ServerIP: 192.168.48.215
-    #ServerIPv6: '${IPv6}'
-    VIRTUAL_HOST: pihole.nwiss.net
-  volumes:
+    environment:
+      ServerIP: 192.168.48.215
+      #ServerIPv6: '${IPv6}'
+      VIRTUAL_HOST: pihole.nwiss.net
+    volumes:
       - '/etc/pihole/:/etc/pihole/'
       - '/etc/dnsmasq.d/:/etc/dnsmasq.d/'
       - '/var/log/pihole.log:/var/log/pihole.log'

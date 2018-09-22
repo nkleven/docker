@@ -16,4 +16,4 @@ services:
       - '/etc/pihole/:/etc/pihole/'
       - '/etc/dnsmasq.d/:/etc/dnsmasq.d/'
       - '/var/log/pihole.log:/var/log/pihole.log'
-  restart: unless-stopped
+    restart: unless-stopped

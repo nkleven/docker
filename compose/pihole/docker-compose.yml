@@ -14,4 +14,4 @@ services:
     volumes:
       - "${DOCKER_CONFIGS}/pihole/:/etc/pihole/"
       - "${DOCKER_CONFIGS}/dnsmasq.d/:/etc/dnsmasq.d/"
-restart: unless-stopped
+    restart: unless-stopped

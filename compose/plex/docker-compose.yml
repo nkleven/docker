@@ -1,0 +1,100 @@
+version: '2.1'
+
+services:
+  Radarr:
+    image: linuxserver/radarr
+    environment:
+      VIRTUAL_HOST: radarr.niwss.net
+      TZ: America/Los_Angeles
+      PGID: 1000
+      PUID: 1000
+    ports:
+      - 7878:7878
+    volumes:
+      - /data/radar/config:/config
+      - /data/Media/FS01/Upload/Movies:/downloads:rw
+      - /data/Media/FS01/Movies:/movies:rw
+
+  Sonarr:
+    image: linuxserver/sonarr
+    environment:
+      VIRTUAL_HOST: sonarr.niwss.net
+      TZ: America/Los_Angeles
+      PGID: 1000
+      PUID: 1000
+    ports:
+      - 8989:8989
+    volumes:
+      - /data/sonarr/config:/config
+      - /data/TV:/tv:rw
+      - /data/Upload/TV:/downloads:rw
+      - /etc/localtime:/etc/localtime:ro
+
+  Hydra:
+    image: linuxserver/hydra
+    environment:
+      VIRTUAL_HOST: hydra.niwss.net
+      VIRTUAL_PORT: 5075
+      TZ: America/Los_Angeles
+      PGID: 1000
+      PUID: 1000
+    ports:
+      - 5075:5075
+    volumes:
+      - /data/hydra/config:/config
+      - /data/Media/FS01/Upload/hydra:/downloads:rw
+
+  Sabnzbd:
+    image: linuxserver/sabnzbd
+    environment:
+      VIRTUAL_HOST: hydra.niwss.net
+      VIRTUAL_PORT: 8080
+      TZ: America/Los_Angeles
+      PGID: 1000
+      PUID: 1000
+    ports:
+      - 8080:8080
+      - 9090:9090
+    volumes:
+      - /data/sabnzbd/config:/config
+      - /data/Media/FS01/Upload/sabnzbd:/config/Downloads/complete:rw
+      - /data/Media/Incomplete:/config/Downloads/incomplete:rw
+
+  Plex:
+    image: linuxserver/pms-docker
+    environment:
+      VERSION: latest
+      PGID: 1000
+      PUID: 1000
+      TZ: America/Los_Angeles
+      VIRTUAL_HOST: plex.nwiss.net
+      VIRTUAL_PORT: 32400
+      PLEX_CLAIM: claim-kHVZFqkmxepw7Mx87qgm
+    ports:
+      - 32400:32400/tcp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32649:32649/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    volumes:
+      - /data/plex/config:/config
+      - /data/Media:/data/media:rw
+      - /data/plex-transcode:/transcode:rw
+
+  PlexRequests:
+    image: linuxserver/plexrequests
+    environment:
+      PGID: 1000
+      PUID: 1000
+      TZ: America/Los_Angeles
+    ports:
+      - 3000: 3000
+    volumes:
+      - /data/plexrequests/config:/config
+      - /etc/localtime:/etc/localtime:ro
+
+
